@@ -3,16 +3,18 @@ import dotenv from "dotenv";
 import { router } from "./router.js";
 import bodyParser from "body-parser";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const app = express();
 import databaseConnection from "./config/databaseConnection.js";
 dotenv.config();
 app.use(bodyParser.urlencoded());
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(
   cors({
     origin: "http://localhost:3000",
-    credentials: true, // If using cookies/auth
+    credentials: true,
   })
 );
 databaseConnection(process.env.DATABASE_LINK)
